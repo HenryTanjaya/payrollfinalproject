@@ -10,6 +10,11 @@ import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,11 +25,10 @@ public class FrmMainPayroll extends javax.swing.JFrame {
     /**
      * Creates new form FrmMain
      */
-    
     Connection myConn = null;
     PreparedStatement myStmt = null;
     ResultSet myRs = null;
-    
+
     public FrmMainPayroll() {
         initComponents();
         setResizable(false);
@@ -41,8 +45,18 @@ public class FrmMainPayroll extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        robby = new javax.swing.JPanel();
         henry = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblDepartment = new javax.swing.JTable();
+        lblDepartmentName = new javax.swing.JLabel();
+        btnAdd = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        txtDepartmentName = new javax.swing.JTextField();
+        btnUpdate = new javax.swing.JButton();
+        lblDepartmentID = new javax.swing.JLabel();
+        txtDepartmentID = new javax.swing.JTextField();
+        btnDepatment = new javax.swing.JButton();
+        robby = new javax.swing.JPanel();
         main = new javax.swing.JPanel();
         txtID = new javax.swing.JTextField();
         btnVerify = new javax.swing.JButton();
@@ -93,11 +107,110 @@ public class FrmMainPayroll extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1600, 900));
         getContentPane().setLayout(null);
 
         jPanel1.setOpaque(false);
         jPanel1.setLayout(new java.awt.CardLayout());
+
+        tblDepartment.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Department ID", "Department Name"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tblDepartment);
+
+        lblDepartmentName.setText("Department Name");
+
+        btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        lblDepartmentID.setText("Department ID");
+
+        btnDepatment.setText("Department");
+        btnDepatment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDepatmentActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout henryLayout = new javax.swing.GroupLayout(henry);
+        henry.setLayout(henryLayout);
+        henryLayout.setHorizontalGroup(
+            henryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(henryLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(henryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, henryLayout.createSequentialGroup()
+                        .addGroup(henryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblDepartmentName)
+                            .addComponent(lblDepartmentID))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(henryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtDepartmentName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDepartmentID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(henryLayout.createSequentialGroup()
+                        .addComponent(btnDepatment, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(1250, Short.MAX_VALUE))
+        );
+        henryLayout.setVerticalGroup(
+            henryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(henryLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(henryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAdd)
+                    .addComponent(btnDelete)
+                    .addComponent(btnUpdate)
+                    .addComponent(btnDepatment))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(henryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDepartmentID)
+                    .addComponent(txtDepartmentID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(henryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDepartmentName)
+                    .addComponent(txtDepartmentName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(609, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(henry, "card6");
 
         javax.swing.GroupLayout robbyLayout = new javax.swing.GroupLayout(robby);
         robby.setLayout(robbyLayout);
@@ -111,19 +224,6 @@ public class FrmMainPayroll extends javax.swing.JFrame {
         );
 
         jPanel1.add(robby, "card5");
-
-        javax.swing.GroupLayout henryLayout = new javax.swing.GroupLayout(henry);
-        henry.setLayout(henryLayout);
-        henryLayout.setHorizontalGroup(
-            henryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1600, Short.MAX_VALUE)
-        );
-        henryLayout.setVerticalGroup(
-            henryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 900, Short.MAX_VALUE)
-        );
-
-        jPanel1.add(henry, "card6");
 
         main.setOpaque(false);
         main.setLayout(null);
@@ -165,7 +265,7 @@ public class FrmMainPayroll extends javax.swing.JFrame {
             }
         });
         admin.add(btnEmployee);
-        btnEmployee.setBounds(80, 400, 90, 23);
+        btnEmployee.setBounds(80, 400, 90, 31);
 
         jPanel2.setOpaque(false);
         jPanel2.setLayout(null);
@@ -179,7 +279,7 @@ public class FrmMainPayroll extends javax.swing.JFrame {
             }
         });
         employee.add(jButton2);
-        jButton2.setBounds(30, 50, 160, 23);
+        jButton2.setBounds(30, 50, 160, 31);
 
         jPanel3.setOpaque(false);
         jPanel3.setLayout(null);
@@ -193,7 +293,7 @@ public class FrmMainPayroll extends javax.swing.JFrame {
             }
         });
         employee.add(jButton10);
-        jButton10.setBounds(260, 50, 130, 23);
+        jButton10.setBounds(260, 50, 130, 31);
 
         jButton11.setText("delete Employee");
         jButton11.addActionListener(new java.awt.event.ActionListener() {
@@ -202,7 +302,7 @@ public class FrmMainPayroll extends javax.swing.JFrame {
             }
         });
         employee.add(jButton11);
-        jButton11.setBounds(460, 50, 160, 23);
+        jButton11.setBounds(460, 50, 160, 31);
 
         jPanel2.add(employee);
         employee.setBounds(0, 0, 1350, 900);
@@ -341,11 +441,11 @@ public class FrmMainPayroll extends javax.swing.JFrame {
 
         jButton9.setText("new Transaction");
         transaction.add(jButton9);
-        jButton9.setBounds(130, 80, 130, 23);
+        jButton9.setBounds(130, 80, 130, 31);
 
         jButton1.setText("view transaction");
         transaction.add(jButton1);
-        jButton1.setBounds(400, 80, 150, 23);
+        jButton1.setBounds(400, 80, 150, 31);
 
         jPanel2.add(transaction);
         transaction.setBounds(0, 0, 1350, 900);
@@ -372,7 +472,7 @@ public class FrmMainPayroll extends javax.swing.JFrame {
 
         jButton8.setText("new department");
         department.add(jButton8);
-        jButton8.setBounds(30, 50, 120, 23);
+        jButton8.setBounds(30, 50, 120, 31);
 
         jPanel2.add(department);
         department.setBounds(0, 0, 1350, 900);
@@ -387,7 +487,7 @@ public class FrmMainPayroll extends javax.swing.JFrame {
             }
         });
         admin.add(jButton7);
-        jButton7.setBounds(80, 830, 73, 23);
+        jButton7.setBounds(80, 830, 73, 31);
 
         btnDepartment.setText("Department");
         btnDepartment.addActionListener(new java.awt.event.ActionListener() {
@@ -396,7 +496,7 @@ public class FrmMainPayroll extends javax.swing.JFrame {
             }
         });
         admin.add(btnDepartment);
-        btnDepartment.setBounds(80, 460, 89, 23);
+        btnDepartment.setBounds(80, 460, 80, 31);
 
         btnBank.setText("Bank");
         btnBank.addActionListener(new java.awt.event.ActionListener() {
@@ -405,7 +505,7 @@ public class FrmMainPayroll extends javax.swing.JFrame {
             }
         });
         admin.add(btnBank);
-        btnBank.setBounds(80, 520, 90, 23);
+        btnBank.setBounds(80, 520, 90, 31);
 
         btnTransaction.setText("Transaction");
         btnTransaction.addActionListener(new java.awt.event.ActionListener() {
@@ -414,7 +514,7 @@ public class FrmMainPayroll extends javax.swing.JFrame {
             }
         });
         admin.add(btnTransaction);
-        btnTransaction.setBounds(80, 340, 89, 23);
+        btnTransaction.setBounds(80, 340, 78, 31);
 
         jPanel1.add(admin, "card3");
 
@@ -486,15 +586,15 @@ public class FrmMainPayroll extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        
+
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        
+
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void btnDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDepartmentActionPerformed
@@ -516,6 +616,61 @@ public class FrmMainPayroll extends javax.swing.JFrame {
     private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIDActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+
+        if (!txtDepartmentName.getText().trim().isEmpty() && !txtDepartmentID.getText().trim().isEmpty()) {
+                Object data[] = {txtDepartmentID.getText().toUpperCase(),
+                    txtDepartmentName.getText().toUpperCase()};
+                DefaultTableModel tableModel = (DefaultTableModel) tblDepartment.getModel();
+                tableModel.addRow(data);
+ 
+
+        }
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        int departmentid = tblDepartment.getSelectedRow();
+        int row = tblDepartment.getSelectedRow();
+        DefaultTableModel tableModel = (DefaultTableModel) tblDepartment.getModel();
+        tableModel.removeRow(row);
+        txtDepartmentID.setText("");
+        txtDepartmentName.setText("");
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        if (tblDepartment.getSelectedRow() >= 0) {
+            int row = tblDepartment.getSelectedRow();
+            DefaultTableModel tableModel = (DefaultTableModel) tblDepartment.getModel();
+            tableModel.setValueAt(txtDepartmentID.getText().toUpperCase(), row, 0);
+            tableModel.setValueAt(txtDepartmentName.getText().toUpperCase(), row, 1);
+        } else {
+            JOptionPane.showMessageDialog(this, "Please Select Data", "App Information", 1);
+        }
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDepatmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDepatmentActionPerformed
+        // TODO add your handling code here:
+        DepartmentSelectionListener();
+
+    }//GEN-LAST:event_btnDepatmentActionPerformed
+
+    private void DepartmentSelectionListener() {
+        ListSelectionListener listener = new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent e) {
+                int row = tblDepartment.getSelectedRow();
+                if (row >= 0) {
+                    txtDepartmentID.setText(tblDepartment.getValueAt(row, 0).toString());
+                    txtDepartmentName.setText(tblDepartment.getValueAt(row, 1).toString());
+                }
+            }
+        };
+        tblDepartment.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tblDepartment.getSelectionModel().addListSelectionListener(listener);
+    }
 
     /**
      * @param args the command line arguments
@@ -552,6 +707,7 @@ public class FrmMainPayroll extends javax.swing.JFrame {
             }
         });
     }
+
     private void changeMainLayout(Component comp) {
         jPanel1.removeAll();
         jPanel1.repaint();
@@ -561,7 +717,7 @@ public class FrmMainPayroll extends javax.swing.JFrame {
         jPanel1.repaint();
         jPanel1.revalidate();
     }
-    
+
     private void changeMainSubLayout(Component comp) {
         jPanel2.removeAll();
         jPanel2.repaint();
@@ -571,7 +727,7 @@ public class FrmMainPayroll extends javax.swing.JFrame {
         jPanel2.repaint();
         jPanel2.revalidate();
     }
-    
+
     private void changeEmployeeLayout(Component comp) {
         jPanel3.removeAll();
         jPanel3.repaint();
@@ -585,10 +741,14 @@ public class FrmMainPayroll extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel admin;
     private javax.swing.JPanel bank;
+    private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBank;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnDepartment;
+    private javax.swing.JButton btnDepatment;
     private javax.swing.JButton btnEmployee;
     private javax.swing.JButton btnTransaction;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnVerify;
     private javax.swing.JPanel createTransaction1;
     private javax.swing.JPanel createTransaction2;
@@ -621,15 +781,21 @@ public class FrmMainPayroll extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JLabel lblDepartmentID;
+    private javax.swing.JLabel lblDepartmentName;
     private javax.swing.JLabel lblDepartmentTransaction;
     private javax.swing.JLabel lblNameTransaction;
     private javax.swing.JLabel lblPositionTransaction;
     private javax.swing.JPanel main;
     private javax.swing.JPanel robby;
+    private javax.swing.JTable tblDepartment;
     private javax.swing.JPanel transaction;
+    private javax.swing.JTextField txtDepartmentID;
+    private javax.swing.JTextField txtDepartmentName;
     private javax.swing.JTextField txtID;
     private javax.swing.JPanel user;
     private javax.swing.JPanel viewTransaction;
